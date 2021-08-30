@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import Layout from '../components/Layout';
-import Router from 'next/router';
+import React, { useState } from "react";
+import Layout from "../components/Layout";
+import Router from "next/router";
 
 const Draft: React.FC = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [companyName, setCompanyName] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [companyName, setCompanyName] = useState("");
 
-const submitData = async (e: React.SyntheticEvent) => {
-  e.preventDefault();
-  try {
-    const body = { name, email, password, companyName };
-    await fetch('/api/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    await Router.push('/');
-  } catch (error) {
-    console.error(error);
-  }
-};
+  const submitData = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    try {
+      const body = { name, email, password, companyName };
+      await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      await Router.push("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Layout>
@@ -36,7 +36,7 @@ const submitData = async (e: React.SyntheticEvent) => {
             value={name}
           />
 
-            <input
+          <input
             autoFocus
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
@@ -59,14 +59,17 @@ const submitData = async (e: React.SyntheticEvent) => {
             value={companyName}
           />
 
-          <input disabled={!password || !name || !email || !companyName} type="submit" value="Signup" />
-
+          <input
+            disabled={!password || !name || !email || !companyName}
+            type="submit"
+            value="Signup"
+          />
         </form>
       </div>
       <style jsx>{`
-      .container {
-        margin-bottom: 25px;
-      }
+        .container {
+          margin-bottom: 25px;
+        }
         .page {
           background: white;
           padding: 3rem;
@@ -75,7 +78,7 @@ const submitData = async (e: React.SyntheticEvent) => {
           align-items: center;
         }
 
-        input[type='text'],
+        input[type="text"],
         textarea {
           width: 100%;
           padding: 0.5rem;
@@ -84,7 +87,7 @@ const submitData = async (e: React.SyntheticEvent) => {
           border: 0.125rem solid rgba(0, 0, 0, 0.2);
         }
 
-        input[type='submit'],
+        input[type="submit"],
         textarea {
           width: 100%;
           padding: 0.5rem;
@@ -93,7 +96,7 @@ const submitData = async (e: React.SyntheticEvent) => {
           border: 0.125rem solid rgba(0, 0, 0, 0.2);
         }
 
-        input[type='password'],
+        input[type="password"],
         textarea {
           width: 100%;
           padding: 0.5rem;
@@ -102,7 +105,7 @@ const submitData = async (e: React.SyntheticEvent) => {
           border: 0.125rem solid rgba(0, 0, 0, 0.2);
         }
 
-        input[type='submit'] {
+        input[type="submit"] {
           background: gray;
           color: black;
           border: 0;

@@ -1,10 +1,9 @@
-import React from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { signOut, useSession } from 'next-auth/client';
+import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { signOut, useSession } from "next-auth/client";
 
-
-const Header: React.FC = () => {
+function Header() {
   const router = useRouter();
   const isActive: (pathname: string) => boolean = (pathname) =>
     router.pathname === pathname;
@@ -24,7 +23,7 @@ const Header: React.FC = () => {
           display: inline-block;
         }
 
-        .left a[data-active='true'] {
+        .left a[data-active="true"] {
           color: gray;
         }
 
@@ -51,7 +50,7 @@ const Header: React.FC = () => {
             display: inline-block;
           }
 
-          .left a[data-active='true'] {
+          .left a[data-active="true"] {
             color: gray;
           }
 
@@ -76,21 +75,12 @@ const Header: React.FC = () => {
   if (!session) {
     right = (
       <div className="right">
-        {/* used for next auth credentials */}
         <Link href="/signup">
-          <a data-active={isActive('/signup')}>Sign Up</a>
+          <a data-active={isActive("/signup")}>Sign Up</a>
         </Link>
         <Link href="/api/auth/signin">
-          <a data-active={isActive('/signup')}>Log in</a>
+          <a data-active={isActive("/signup")}>Log in</a>
         </Link>
-
-        {/* used for custom login credentials */}
-        {/* <Link href="/signup">
-          <a data-active={isActive('/signup')}>Sign Up</a>
-        </Link>
-        <Link href="/login">
-          <a data-active={isActive('/login')}>Log in</a>
-        </Link> */}
 
         <style jsx>{`
           a {
@@ -121,7 +111,7 @@ const Header: React.FC = () => {
     left = (
       <div className="left">
         <Link href="/">
-          <a className="bold" data-active={isActive('/')}>
+          <a className="bold" data-active={isActive("/")}>
             {session.user}
           </a>
         </Link>
@@ -136,7 +126,7 @@ const Header: React.FC = () => {
             display: inline-block;
           }
 
-          .left a[data-active='true'] {
+          .left a[data-active="true"] {
             color: gray;
           }
 
