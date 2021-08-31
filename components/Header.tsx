@@ -11,26 +11,12 @@ function Header() {
   const [session, loading] = useSession();
 
   let left = (
-    <div className="left">
-      <style jsx>{`
-        .bold {
-          font-weight: bold;
-        }
-
-        a {
-          text-decoration: none;
-          color: #000;
-          display: inline-block;
-        }
-
-        .left a[data-active="true"] {
-          color: gray;
-        }
-
-        a + a {
-          margin-left: 1rem;
-        }
-      `}</style>
+    <div className="flex space-x-7">
+      <div>
+        <a href="#" className="flex items-center py-4 px-2">
+          <span className="font-semibold text-gray-500 text-lg"></span>
+        </a>
+      </div>
     </div>
   );
 
@@ -38,157 +24,78 @@ function Header() {
 
   if (loading) {
     left = (
-      <div className="left">
-        <style jsx>{`
-          .bold {
-            font-weight: bold;
-          }
-
-          a {
-            text-decoration: none;
-            color: #000;
-            display: inline-block;
-          }
-
-          .left a[data-active="true"] {
-            color: gray;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-        `}</style>
+      <div className="flex space-x-7">
+        <div>
+          <a href="#" className="flex items-center py-4 px-2">
+            <span className="font-semibold text-gray-500 text-lg"></span>
+          </a>
+        </div>
       </div>
     );
     right = (
-      <div className="right">
-        <p>Validating session ...</p>
-        <style jsx>{`
-          .right {
-            margin-left: auto;
-          }
-        `}</style>
+      <div className="hidden md:flex items-center space-x-3 ">
+        <p>validating session</p>
       </div>
     );
   }
 
   if (!session) {
     right = (
-      <div className="right">
+      <div className="hidden md:flex items-center space-x-3 ">
         <Link href="/signup">
-          <a data-active={isActive("/signup")}>Sign Up</a>
+          <a
+            data-active={isActive("/signup")}
+            className="py-2 px-2 font-medium text-white bg-gray-500 rounded hover:bg-black-400 transition duration-300"
+          >
+            Sign Up
+          </a>
         </Link>
+
         <Link href="/api/auth/signin">
-          <a data-active={isActive("/signup")}>Log in</a>
+          <a
+            data-active={isActive("/signup")}
+            className="py-2 px-2 font-medium text-white bg-gray-500 rounded hover:bg-black-400 transition duration-300"
+          >
+            Log in
+          </a>
         </Link>
-
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: #000;
-            display: inline-block;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-
-          .right {
-            margin-left: auto;
-          }
-
-          .right a {
-            border: 1px solid black;
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-        `}</style>
       </div>
     );
   }
 
   if (session) {
     left = (
-      <div className="left">
-        <Link href="/">
-          <a className="bold" data-active={isActive("/")}>
-            {session.user}
-          </a>
-        </Link>
-        <style jsx>{`
-          .bold {
-            font-weight: bold;
-          }
-
-          a {
-            text-decoration: none;
-            color: #000;
-            display: inline-block;
-          }
-
-          .left a[data-active="true"] {
-            color: gray;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-        `}</style>
+      <div className="flex space-x-7">
+      <div>
+        <p className="flex items-center py-4 px-2">
+          <span className="font-semibold text-gray-500 text-lg">
+            {session.user}  
+          </span>
+        </p>
       </div>
+    </div>
     );
     right = (
-      <div className="right">
-        <button onClick={() => signOut()}>
-          <a>Log out</a>
-        </button>
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: #000;
-            display: inline-block;
-          }
-
-          p {
-            display: inline-block;
-            font-size: 13px;
-            padding-right: 1rem;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-
-          .right {
-            margin-left: auto;
-          }
-
-          .right a {
-            border: 1px solid black;
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-
-          button {
-            border: none;
-          }
-        `}</style>
+      <div className="hidden md:flex items-center space-x-3 ">
+          <button onClick={() => signOut()}
+            className="py-2 px-2 font-medium text-white bg-gray-500 rounded hover:bg-black-400 transition duration-300"
+          >
+            Log out
+          </button>
       </div>
     );
   }
 
   return (
-    <nav>
-      {left}
-      {right}
-      <style jsx>{`
-        nav {
-          display: flex;
-          padding: 2rem;
-          align-items: center;
-        }
-      `}</style>
+    <nav className="bg-white shadow-lg py-2">
+      <div className="max-w-8xl mx-auto px-5">
+        <div className="flex justify-between">
+          {left}
+          {right}
+        </div>
+      </div>
     </nav>
   );
-};
+}
 
 export default Header;
