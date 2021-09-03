@@ -12,7 +12,7 @@ const configuration = {
   },
   session: {
     jwt: true,
-    maxAge: 30 * 24 * 60 * 60,
+    maxAge: 30 * 24 * 60 * 60
   },
   providers: [
     Providers.Credentials({
@@ -52,21 +52,28 @@ const configuration = {
     }),
   ],
   callbacks: {
+    async redirect(url, baseUrl) {
+      return "/";
+    },
     async session(session, token) {
       const result = await prisma.company.findUnique({
         where: {
           id: userAccount.companyId,
         },
       });
+      const data = {
+        name: result.name,
+        email: userAccount.email,
+      };
       if (userAccount !== null) {
-        session.user = result.name;
+        session.user = data;
       } else if (
         typeof token.user !== typeof undefined &&
         (typeof session.user === typeof undefined ||
           (typeof session.user !== typeof undefined &&
             typeof session.user.userId === typeof undefined))
       ) {
-        session.user = result.name;
+        session.user = data;
       } else if (typeof token !== typeof undefined) {
         session.token = token;
       }

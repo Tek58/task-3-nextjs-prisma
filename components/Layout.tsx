@@ -9,9 +9,7 @@ function Layout(props) {
   return (
     <div>
       <Header />
-      <div className="flex mt-32 justify-center">
-        {props.children}
-      </div>
+      <div className="flex mt-32 justify-center">{props.children}</div>
     </div>
   );
 }

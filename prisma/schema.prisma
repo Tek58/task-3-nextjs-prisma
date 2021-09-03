@@ -7,14 +7,23 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model Post {
+  id        Int     @default(autoincrement()) @id
+  title     String
+  content   String?
+  user    User?   @relation(fields: [authorId], references: [id])
+  authorId  Int?
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   name      String
-  email     String?  
+  email     String?  @unique
   password  String
   company   Company?  @relation(fields: [companyId], references: [id])
   companyId Int?
   createdAt DateTime @default(now()) @map(name: "created_at")
+  posts         Post[]
 
 }
 

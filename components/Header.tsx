@@ -66,22 +66,31 @@ function Header() {
   if (session) {
     left = (
       <div className="flex space-x-7">
-      <div>
-        <p className="flex items-center py-4 px-2">
-          <span className="font-semibold text-gray-500 text-lg">
-            {session.user}  
-          </span>
-        </p>
+        <div>
+          <p className="flex items-center py-4 px-2">
+            <span className="font-semibold text-gray-500 text-lg">
+              {session.user.name}
+            </span>
+          </p>
+        </div>
       </div>
-    </div>
     );
     right = (
       <div className="hidden md:flex items-center space-x-3 ">
-          <button onClick={() => signOut()}
+        <Link href="/create">
+          <a
+            data-active={isActive("/create")}
             className="py-2 px-2 font-medium text-white bg-gray-500 rounded hover:bg-black-400 transition duration-300"
           >
-            Log out
-          </button>
+            New Post
+          </a>
+        </Link>
+        <button
+          onClick={() => signOut()}
+          className="py-2 px-2 font-medium text-white bg-gray-500 rounded hover:bg-black-400 transition duration-300"
+        >
+          Log out
+        </button>
       </div>
     );
   }
