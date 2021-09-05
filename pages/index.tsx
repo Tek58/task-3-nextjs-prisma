@@ -10,7 +10,7 @@ import { session } from "next-auth/client";
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
   if (!session) {
-    res.statusCode = 403;
+    res.statusCode = 401;
     return { props: { newPosts: [] } };
   }
 
